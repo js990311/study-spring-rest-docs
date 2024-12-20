@@ -11,7 +11,7 @@ public class RestDocsConfig {
     @Bean
     public RestDocumentationResultHandler write(){
         return MockMvcRestDocumentation.document(
-                "{method-name}",
+                "{class-name}/{method-name}",
                 Preprocessors.preprocessRequest(Preprocessors.prettyPrint()),
                 Preprocessors.preprocessResponse(Preprocessors.prettyPrint())
         );
