@@ -3,6 +3,8 @@ package com.study.restdocs.config;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.restdocs.RestDocumentationContextProvider;
@@ -29,7 +31,7 @@ public abstract class AbstractRestDocsTest {
     protected MockMvc mockMvc;
 
     @BeforeEach
-    void setUp(WebApplicationContext context, RestDocumentationContextProvider restDocumentation){
+    void setUp(final WebApplicationContext context,final RestDocumentationContextProvider restDocumentation){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
                 .apply(documentationConfiguration(restDocumentation))
                 .alwaysDo(MockMvcResultHandlers.print())

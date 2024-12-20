@@ -15,6 +15,7 @@ java {
 }
 
 configurations {
+	asciidoctorExt
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -40,11 +41,36 @@ dependencies {
 
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
 tasks.named('test') {
 	outputs.dir snippetsDir
 	useJUnitPlatform()
+}
+
+asciidoctor{
+	configurations 'asciidoctorExt'
+	baseDirFollowsSourceDir()
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+asciidoctor.doFirst {
+	delete file('src/main/resources/static/docs')
+}
+
+task createDocument(type: Copy){
+	dependsOn asciidoctor
+	from file("build/docs/asciidoc")
+	into file('src/main/resources/static/docs')
+}
+
+bootJar{
+	dependsOn createDocument
+	from("${asciidoctor.outputDir}"){
+		into 'static/docs'
+	}
 }
 
 tasks.named('asciidoctor') {

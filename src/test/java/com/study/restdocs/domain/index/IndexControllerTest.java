@@ -15,6 +15,9 @@ class IndexControllerTest extends AbstractRestDocsTest {
     void indexes() throws Exception {
         mockMvc.perform(
                 get("/")
-        ).andExpect(status().isOk());
+        ).andExpect(status().isOk())
+                .andDo(
+                        restDocs.document()
+                );
     }
 }
