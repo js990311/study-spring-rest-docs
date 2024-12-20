@@ -2,9 +2,11 @@ package com.study.restdocs.domain.article.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "articles")
 public class Article {
     @Id

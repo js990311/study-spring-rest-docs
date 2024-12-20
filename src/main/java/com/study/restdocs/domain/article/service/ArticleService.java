@@ -25,7 +25,11 @@ public class ArticleService {
 
     /* read */
     public Page<ArticleDto> readAllArticle(int pageNumber, int pageSize){
-        return articleRepository.findAllBy(PageRequest.of(pageNumber, pageSize)).map(ArticleDto::from);
+        return articleRepository.findAll(PageRequest.of(pageNumber, pageSize)).map(ArticleDto::from);
+    }
+
+    public ArticleDto readById(long id){
+        return ArticleDto.from(articleRepository.findById(id).orElseThrow());
     }
 
     /* Update */
