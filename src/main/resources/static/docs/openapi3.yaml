@@ -6,6 +6,23 @@ info:
 servers:
 - url: localhost:8080
 tags: []
-paths: {}
+paths:
+  /:
+    get:
+      operationId: index-controller-test_indexes
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/486549215"
+              examples:
+                index-controller-test_indexes:
+                  value: "{\r\n  \"indexes\" : [ {\r\n    \"path\" : \"/article\"\
+                    ,\r\n    \"description\" : \"article 관련\"\r\n  } ],\r\n  \"size\"\
+                    \ : 1\r\n}"
 components:
-  schemas: {}
+  schemas:
+    "486549215":
+      type: object
