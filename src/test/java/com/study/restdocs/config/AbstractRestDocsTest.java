@@ -1,5 +1,6 @@
 package com.study.restdocs.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 public abstract class AbstractRestDocsTest {
     @Autowired
     protected RestDocumentationResultHandler restDocs;
+
+    @Autowired
+    protected ObjectMapper objectMapper;
 
     @Autowired
     protected WebApplicationContext context;

@@ -19,7 +19,7 @@ operation::article-controller-test/get-all-articles/[snippets='request-body,resp
 
 === [GET] /articles/{id}
 ==== Summary
-존재하는 모든 아티클을 가져옴
+id에 해당하는 Article을 작성함
 
 ==== API 요청 예시
 operation::article-controller-test/get-by-id/[snippets='curl-request,httpie-request']
@@ -29,3 +29,29 @@ operation::article-controller-test/get-by-id/[snippets='http-request,http-respon
 
 ==== 요청 본문 및 응답 본문 예시
 operation::article-controller-test/get-by-id/[snippets='request-body,response-body']
+
+=== [POST] /articles
+==== Summary
+아티클을 작성함
+
+==== API 요청 예시
+operation::article-controller-test/post-article/[snippets='curl-request,httpie-request']
+
+==== HTTP 요청 및 응답 예시
+operation::article-controller-test/post-article/[snippets='http-request,http-response']
+
+==== 요청 본문 및 응답 본문 예시
+operation::article-controller-test/post-article/[snippets='request-body,response-body']
+
+=== [POST] /articles/update
+==== Summary
+아티클을 작성함
+
+==== API 요청 예시
+operation::article-controller-test/test-post-article/[snippets='curl-request,httpie-request']
+
+==== HTTP 요청 및 응답 예시
+operation::article-controller-test/test-post-article/[snippets='http-request,http-response']
+
+==== 요청 본문 및 응답 본문 예시
+operation::article-controller-test/test-post-article/[snippets='request-body,response-body']
