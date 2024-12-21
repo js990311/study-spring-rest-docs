@@ -17,6 +17,7 @@ import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @ActiveProfiles("test")
@@ -38,7 +39,7 @@ class IndexControllerTest extends AbstractRestDocsTest {
                                 ResourceSnippetParameters.builder()
                                         .summary("서버 내 indexes를 모두 가져옴")
                                         .responseFields(
-                                                Indexes.indexes()
+                                                Indexes.all()
                                         )
                                         .build()
                         )
@@ -46,21 +47,25 @@ class IndexControllerTest extends AbstractRestDocsTest {
     }
 
     static class Indexes{
-        public static FieldDescriptor[] indexes(){
-            List<FieldDescriptor> arr = new ArrayList<>();
-            arr.add(
-                    fieldWithPath("size").description("indexes의 사이즈")
-            );
-            arr.add(
+        public static FieldDescriptor[] container(){
+            return new FieldDescriptor[]{
+                    fieldWithPath("size").description("indexes의 사이즈"),
                     fieldWithPath("indexes").description("indexes의 목록")
-            );
-            arr.add(
-                    fieldWithPath("indexes[].path").description("index 항목의 경로")
-            );
-            arr.add(
-                    fieldWithPath("indexes[].description").description("index 항목의 설명")
-            );
-            return arr.toArray(FieldDescriptor[]::new);
+            };
+        }
+
+        public static FieldDescriptor[] body(String prefix){
+            return new FieldDescriptor[]{
+                    fieldWithPath(prefix + "path").description("index 항목의 경로"),
+                    fieldWithPath(prefix + "description").description("index 항목의 설명")
+            };
+        }
+
+        public static FieldDescriptor[] all(){
+            List<FieldDescriptor> ret = new ArrayList<>();
+            Collections.addAll(ret, container());
+            Collections.addAll(ret, body("indexes[]."));
+            return ret.toArray(FieldDescriptor[]::new);
         }
     }
 
