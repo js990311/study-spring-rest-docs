@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.4.1'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
+	id 'com.epages.restdocs-api-spec' version "0.15.3"
 }
 
 group = 'com.study'
@@ -42,6 +43,17 @@ dependencies {
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+
+	// rest docs and open api
+	testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.15.3'
+}
+
+openapi3 {
+	server  = 'localhost:8080'
+	title = "Anki"
+	description = "Anki 작업"
+	version="0.1.0"
+	format = "yaml"
 }
 
 tasks.named('test') {
