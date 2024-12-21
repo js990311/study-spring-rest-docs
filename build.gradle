@@ -56,10 +56,12 @@ openapi3 {
 	format = "yaml"
 }
 
+
 tasks.named('test') {
 	outputs.dir snippetsDir
 	useJUnitPlatform()
 }
+
 
 asciidoctor{
 	configurations 'asciidoctorExt'
@@ -85,7 +87,17 @@ bootJar{
 	}
 }
 
+
 tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn test
+}
+
+tasks.register('copyOasToSwagger', Copy) {
+	doFirst {
+		delete file('src/main/resources/static/swagger-ui/openapi3.yaml')
+	}
+	from file('build/api-spec/openapi3.yaml')
+	into file('src/main/resources/static/docs/.')
+	dependsOn tasks.named('openapi3')
 }

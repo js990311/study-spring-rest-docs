@@ -1,0 +1,11 @@
+openapi: 3.0.1
+info:
+  title: Anki
+  description: Anki 작업
+  version: 0.1.0
+servers:
+- url: localhost:8080
+tags: []
+paths: {}
+components:
+  schemas: {}
