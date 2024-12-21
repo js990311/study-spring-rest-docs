@@ -61,12 +61,30 @@ class ArticleControllerTest extends AbstractRestDocsTest {
     @Test
     void getById() throws Exception{
         mockMvc.perform(
-                get("/articles/" + 1)
+                get("/articles/{id}",1)
         )
                 .andExpect(status().isOk())
                 .andDo(
                         restDocs.document()
-                );
+                )
+                .andDo(
+                        MockMvcRestDocumentationWrapper.document(
+                                "get-by-id",
+                                ResourceDocumentation.resource(
+                                        ResourceSnippetParameters.builder()
+                                                .tag("articles")
+                                                .summary("ID에 해당하는 Article 보기")
+                                                .pathParameters(
+                                                        parameterWithName("id").description("article 아이디")
+                                                )
+                                                .responseFields(
+                                                        ArticleDtoDocs.docs("")
+                                                )
+                                                .build()
+                                )
+                        )
+                )
+        ;
     }
 
     @Test

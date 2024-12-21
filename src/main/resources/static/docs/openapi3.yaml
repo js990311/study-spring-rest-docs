@@ -70,8 +70,41 @@ paths:
                     },{\"id\":18,\"content\":\"Database testing content\"},{\"id\"\
                     :19,\"content\":\"SQL insert statement test\"},{\"id\":20,\"content\"\
                     :\"Last random article\"}]}"
+  /articles/{id}:
+    get:
+      tags:
+      - articles
+      summary: ID에 해당하는 Article 보기
+      description: ID에 해당하는 Article 보기
+      operationId: get-by-id
+      parameters:
+      - name: id
+        in: path
+        description: article 아이디
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/articles-id1470658377"
+              examples:
+                get-by-id:
+                  value: "{\"id\":1,\"content\":\"콘텐츠임\"}"
 components:
   schemas:
+    articles-id1470658377:
+      type: object
+      properties:
+        id:
+          type: number
+          description: article의 고유번호
+        content:
+          type: string
+          description: article의 콘텐츠
     articles1661470276:
       type: object
       properties:
