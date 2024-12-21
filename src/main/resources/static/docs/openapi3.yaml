@@ -94,6 +94,31 @@ paths:
               examples:
                 post-article:
                   value: "{\"id\":61,\"content\":\"콘텐츠임\"}"
+  /articles/update:
+    post:
+      tags:
+      - articles
+      summary: article 새로 작성함
+      description: article 새로 작성함
+      operationId: put-article
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/articles-update894796639"
+            examples:
+              put-article:
+                value: "{\"id\":\"1\",\"content\":\"콘텐츠임\"}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/articles-id1470658377"
+              examples:
+                put-article:
+                  value: "{\"id\":1,\"content\":\"콘텐츠임\"}"
   /articles/{id}:
     get:
       tags:
@@ -132,6 +157,15 @@ components:
     articles-1234052823:
       type: object
       properties:
+        content:
+          type: string
+          description: 작성할 article의 본문
+    articles-update894796639:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 수정할 article의 id
         content:
           type: string
           description: 작성할 article의 본문
