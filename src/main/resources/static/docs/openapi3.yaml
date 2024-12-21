@@ -9,20 +9,41 @@ tags: []
 paths:
   /:
     get:
-      operationId: index-controller-test_indexes
+      summary: 서버 내 indexes를 모두 가져옴
+      description: 서버 내 indexes를 모두 가져옴
+      operationId: get-indexesindex-controller-test_indexes
       responses:
         "200":
           description: "200"
           content:
             application/json;charset=UTF-8:
               schema:
-                $ref: "#/components/schemas/486549215"
+                $ref: "#/components/schemas/630625176"
               examples:
+                get-indexes:
+                  value: "{\"indexes\":[{\"path\":\"/article\",\"description\":\"\
+                    article 관련\"}],\"size\":1}"
                 index-controller-test_indexes:
                   value: "{\r\n  \"indexes\" : [ {\r\n    \"path\" : \"/article\"\
                     ,\r\n    \"description\" : \"article 관련\"\r\n  } ],\r\n  \"size\"\
                     \ : 1\r\n}"
 components:
   schemas:
-    "486549215":
+    "630625176":
       type: object
+      properties:
+        indexes:
+          type: array
+          description: indexes의 목록
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+                description: index 항목의 경로
+              description:
+                type: string
+                description: index 항목의 설명
+        size:
+          type: number
+          description: indexes의 사이즈

@@ -71,22 +71,14 @@ asciidoctor{
 }
 
 asciidoctor.doFirst {
-	delete file('src/main/resources/static/docs')
+	delete file('src/main/resources/static/docs/restdocs')
 }
 
 task createDocument(type: Copy){
 	dependsOn asciidoctor
 	from file("build/docs/asciidoc")
-	into file('src/main/resources/static/docs')
+	into file('src/main/resources/static/docs/restdocs')
 }
-
-bootJar{
-	dependsOn createDocument
-	from("${asciidoctor.outputDir}"){
-		into 'static/docs'
-	}
-}
-
 
 tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
@@ -101,3 +93,11 @@ tasks.register('copyOasToSwagger', Copy) {
 	into file('src/main/resources/static/docs/.')
 	dependsOn tasks.named('openapi3')
 }
+
+bootJar{
+	dependsOn createDocument, tasks.named('copyOasToSwagger')
+	from("${asciidoctor.outputDir}"){
+		into 'static/docs/restdocs'
+	}
+}
+
