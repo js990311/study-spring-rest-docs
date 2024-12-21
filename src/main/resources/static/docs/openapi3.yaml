@@ -11,7 +11,7 @@ paths:
     get:
       summary: 서버 내 indexes를 모두 가져옴
       description: 서버 내 indexes를 모두 가져옴
-      operationId: get-indexesindex-controller-test_indexes
+      operationId: get-indexes
       responses:
         "200":
           description: "200"
@@ -23,12 +23,79 @@ paths:
                 get-indexes:
                   value: "{\"indexes\":[{\"path\":\"/article\",\"description\":\"\
                     article 관련\"}],\"size\":1}"
-                index-controller-test_indexes:
-                  value: "{\r\n  \"indexes\" : [ {\r\n    \"path\" : \"/article\"\
-                    ,\r\n    \"description\" : \"article 관련\"\r\n  } ],\r\n  \"size\"\
-                    \ : 1\r\n}"
+  /articles:
+    get:
+      tags:
+      - articles
+      summary: Article을 모두 보기
+      description: Article을 모두 보기
+      operationId: get-all-articles
+      parameters:
+      - name: pageSize
+        in: query
+        description: 페이지가 포함하는 데이터의 크기
+        required: true
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        description: 가져오려는 페이지의 번호
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/articles1661470276"
+              examples:
+                get-all-articles:
+                  value: "{\"page\":0,\"pageSize\":2,\"size\":20,\"content\":[{\"\
+                    id\":1,\"content\":\"Lorem ipsum dolor sit amet\"},{\"id\":2,\"\
+                    content\":\"Random content for testing\"},{\"id\":3,\"content\"\
+                    :\"This is a sample article\"},{\"id\":4,\"content\":\"Another\
+                    \ random text here\"},{\"id\":5,\"content\":\"Testing data insertion\"\
+                    },{\"id\":6,\"content\":\"Content generation example\"},{\"id\"\
+                    :7,\"content\":\"Example of random data\"},{\"id\":8,\"content\"\
+                    :\"Database testing content\"},{\"id\":9,\"content\":\"SQL insert\
+                    \ statement test\"},{\"id\":10,\"content\":\"Last random article\"\
+                    },{\"id\":11,\"content\":\"Lorem ipsum dolor sit amet\"},{\"id\"\
+                    :12,\"content\":\"Random content for testing\"},{\"id\":13,\"\
+                    content\":\"This is a sample article\"},{\"id\":14,\"content\"\
+                    :\"Another random text here\"},{\"id\":15,\"content\":\"Testing\
+                    \ data insertion\"},{\"id\":16,\"content\":\"Content generation\
+                    \ example\"},{\"id\":17,\"content\":\"Example of random data\"\
+                    },{\"id\":18,\"content\":\"Database testing content\"},{\"id\"\
+                    :19,\"content\":\"SQL insert statement test\"},{\"id\":20,\"content\"\
+                    :\"Last random article\"}]}"
 components:
   schemas:
+    articles1661470276:
+      type: object
+      properties:
+        size:
+          type: number
+          description: content의 크기
+        pageSize:
+          type: number
+          description: 전체 페이지의 크기
+        page:
+          type: number
+          description: 현재 페이지의 번호
+        content:
+          type: array
+          description: 실제 데이터들
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: article의 고유번호
+              content:
+                type: string
+                description: article의 콘텐츠
     "630625176":
       type: object
       properties:
