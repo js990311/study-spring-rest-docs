@@ -2,8 +2,11 @@
 :doctype: book
 :source-highlighter: highlightjs
 :toc: left
-:toclevels: 2
+:toclevels: 3
 :sectlinks:
 
 == indexes API
-include::indexes.adoc[]
+include::indexes/indexes.adoc[]
+
+== articles API
+include::articles/articles.adoc[]
