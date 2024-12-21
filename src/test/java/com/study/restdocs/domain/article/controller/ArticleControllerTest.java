@@ -96,7 +96,25 @@ class ArticleControllerTest extends AbstractRestDocsTest {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(map))
         ).andExpect(status().isOk())
-                .andDo(restDocs.document());
+                .andDo(restDocs.document())
+                .andDo(
+                        MockMvcRestDocumentationWrapper.document(
+                                "post-article",
+                                ResourceDocumentation.resource(
+                                        ResourceSnippetParameters.builder()
+                                                .tag("articles")
+                                                .summary("article 새로 작성함")
+                                                .requestFields(
+                                                        fieldWithPath("content").description("작성할 article의 본문")
+                                                )
+                                                .responseFields(
+                                                        ArticleDtoDocs.docs("")
+                                                )
+                                                .build()
+                                )
+                        )
+                )
+        ;
     }
 
     @Test

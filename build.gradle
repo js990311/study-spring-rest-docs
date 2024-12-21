@@ -49,7 +49,7 @@ dependencies {
 }
 
 openapi3 {
-	server  = 'localhost:8080'
+	server  = 'http://localhost:8080/'
 	title = "Anki"
 	description = "Anki 작업"
 	version="0.1.0"

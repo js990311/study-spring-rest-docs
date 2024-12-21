@@ -4,7 +4,7 @@ info:
   description: Anki 작업
   version: 0.1.0
 servers:
-- url: localhost:8080
+- url: http://localhost:8080/
 tags: []
 paths:
   /:
@@ -70,6 +70,30 @@ paths:
                     },{\"id\":18,\"content\":\"Database testing content\"},{\"id\"\
                     :19,\"content\":\"SQL insert statement test\"},{\"id\":20,\"content\"\
                     :\"Last random article\"}]}"
+    post:
+      tags:
+      - articles
+      summary: article 새로 작성함
+      description: article 새로 작성함
+      operationId: post-article
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/articles-1234052823"
+            examples:
+              post-article:
+                value: "{\"content\":\"콘텐츠임\"}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/articles-id1470658377"
+              examples:
+                post-article:
+                  value: "{\"id\":61,\"content\":\"콘텐츠임\"}"
   /articles/{id}:
     get:
       tags:
@@ -105,6 +129,12 @@ components:
         content:
           type: string
           description: article의 콘텐츠
+    articles-1234052823:
+      type: object
+      properties:
+        content:
+          type: string
+          description: 작성할 article의 본문
     articles1661470276:
       type: object
       properties:
